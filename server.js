@@ -1,10 +1,13 @@
-var express = require('express');
-var app = express();
-var io = require('socket.io')
-var io = io.listen(app);
+var http = require('http');
+var express = require('express'),
+    app = module.exports.app = express();
+
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);  //pass a http.Server instance
+
 
 app.get('/', function (req, res) {
-  res.send('hihihi!');
+  res.sendFile('client/index.html');
 });
 
 app.listen(8080, function () {
